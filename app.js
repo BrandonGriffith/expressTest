@@ -5,7 +5,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import homeRouter from './routes/home.js';
-import apiRouter from './routes/api.js';
+import usersRouter from './routes/users.js';
 import logger from './middleware/logger.js';
 import errorHandler from './middleware/error.js';
 
@@ -39,8 +39,8 @@ app.use(logger);
 // Use the router for all routes starting with '/'
 app.use('/', homeRouter);
 
-// Use the API router for all routes starting with '/api'
-app.use('/api', apiRouter);
+// Use the users router for all routes starting with '/users'
+app.use('/users', usersRouter);
 
 // Catch-all routes that do not exist
 app.use((req, res) => {
