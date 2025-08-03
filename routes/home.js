@@ -11,10 +11,10 @@ const router = express.Router();
 // Serve static files from the "public" directory
 router.use(express.static(path.join(__dirname, '../public')));
 
-// Define a route for the homepage
-router.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public', 'index.html'));
-});
+// // Define a route for the homepage
+// router.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../public', 'index.html'));
+// });
 
 // module.exports = router;
 export default router;

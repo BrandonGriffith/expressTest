@@ -57,7 +57,7 @@ footer {
     z-index: 1;
 }
 
-#coolButton {
+.coolButton {
     position: relative;
     z-index: 2;
     background: linear-gradient(to right, #6a11cb, #2575fc);
@@ -71,17 +71,27 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-#coolButton:hover {
+.coolButton:hover {
     transform: scale(1.1);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-#coolButton:active {
+.coolButton:active {
     transform: scale(1);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 #buttonMessage {
+    position: relative;
+    z-index: 2;
+}
+
+#add-user-form {
+    position: relative;
+    z-index: 2;
+}
+
+#name, #add-user-form button {
     position: relative;
     z-index: 2;
 }

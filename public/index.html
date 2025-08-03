@@ -16,12 +16,27 @@
     </main>
     <section>
         <h2>Interactive Section</h2>
-        <button id="coolButton">Click Me!</button>
+        <button id="display-text" class="coolButton">Click Me!</button>
         <p id="buttonMessage" style="display: none;">You clicked the button! Isn't this cool?</p>
     </section>
     <section>
         <h2>Dynamic Background</h2>
         <p>Watch the background colors change dynamically!</p>
+    </section>
+    <section>
+        <h2>Add a New User</h2>
+        <form id="add-user-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <button type="submit" class="coolButton">Add User</button>
+        </form>
+        <p id="form-message" style="display: none;"></p>
+    </section>
+    <section>
+        <h1>Users</h1>
+        <button id="get-users-btn" class="coolButton">Get Users</button>
+        <div id="users-output"></div>
     </section>
     <canvas id="bouncingBallCanvas"></canvas>
     <footer>

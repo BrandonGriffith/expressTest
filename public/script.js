@@ -1,3 +1,63 @@
+const usersButton = document.getElementById('get-users-btn');
+const usersOutput = document.getElementById('users-output');
+const addUserForm = document.getElementById('add-user-form');
+const formMessage = document.getElementById('form-message');
+
+
+async function showUsers() {
+    try {
+        const res = await fetch('http://localhost:3000/users');
+        const users = await res.json();
+        usersOutput.innerHTML = '';
+        users.forEach((user) => {
+            const userEl = document.createElement('div');
+            userEl.textContent = user.name;
+            usersOutput.appendChild(userEl);
+        });
+    } catch (error) {
+        console.log(error);
+    };
+};
+
+usersButton.addEventListener('click', showUsers);
+
+if (addUserForm) {
+    addUserForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(addUserForm);
+        const user = {
+            name: formData.get('name')
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(user)
+            });
+
+            if (response.ok) {
+                formMessage.textContent = 'User added successfully!';
+                formMessage.style.display = 'block';
+                formMessage.style.color = 'green';
+                addUserForm.reset();
+            } else {
+                formMessage.textContent = 'Failed to add user.';
+                formMessage.style.display = 'block';
+                formMessage.style.color = 'red';
+            }
+        } catch (error) {
+            console.error('Error adding user:', error);
+            formMessage.textContent = 'An error occurred.';
+            formMessage.style.display = 'block';
+            formMessage.style.color = 'red';
+        }
+    });
+}
+
 // Dynamic background color change
 const colors = ['#ff7e5f', '#feb47b', '#6a11cb', '#2575fc', '#43cea2', '#185a9d'];
 let index = 0;
@@ -7,7 +67,7 @@ setInterval(() => {
 }, 3000);
 
 // Button interaction
-const button = document.getElementById('coolButton');
+const button = document.getElementById('display-text');
 if (button) {
     button.addEventListener('click', () => {
         const message = document.getElementById('buttonMessage');
