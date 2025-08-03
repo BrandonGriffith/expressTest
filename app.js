@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import homeRouter from './routes/home.js';
 import apiRouter from './routes/api.js';
 import logger from './middleware/logger.js';
+import errorHandler from './middleware/error.js';
 
 
 // require('dotenv').config();
@@ -32,6 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Middleware to log requests
+// This should be added before the routes to log incoming requests
 app.use(logger);
 
 // Use the router for all routes starting with '/'
@@ -40,11 +42,15 @@ app.use('/', homeRouter);
 // Use the API router for all routes starting with '/api'
 app.use('/api', apiRouter);
 
-// Catch-all route for 404 errors
+// Catch-all routes that do not exist
 app.use((req, res) => {
-  // res.status(404).send('404 - Page Not Found');
-  res.redirect('/');
+  res.status(404).send({error: '404 - Page Not Found'});
+  // res.redirect('/');
 });
+
+// Error handling middleware
+// This should be the last middleware added
+app.use(errorHandler);
 
 // Start the server
 app.listen(PORT, () => {

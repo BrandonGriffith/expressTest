@@ -5,5 +5,5 @@ const data = [
     { id: 4, name: "Bob Brown"},
     { id: 5, name: "Charlie Davis"}
 ];
-
+data.count = data.length + 1;
 export default data;
