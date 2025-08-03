@@ -3,9 +3,11 @@
 // const route = require('./routes/route');
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import homeRouter from './routes/home.js';
 import apiRouter from './routes/api.js';
-import dotenv from 'dotenv';
+import logger from './middleware/logger.js';
+
 
 // require('dotenv').config();
 // Load environment variables from .env file
@@ -29,12 +31,16 @@ app.use(express.json());
 // Middleware to parse URL-encoded data
 app.use(express.urlencoded({ extended: false }));
 
+// Middleware to log requests
+app.use(logger);
+
 // Use the router for all routes starting with '/'
 app.use('/', homeRouter);
 
 // Use the API router for all routes starting with '/api'
 app.use('/api', apiRouter);
 
+// Catch-all route for 404 errors
 app.use((req, res) => {
   // res.status(404).send('404 - Page Not Found');
   res.redirect('/');
